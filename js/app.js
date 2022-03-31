@@ -2,7 +2,7 @@
 
 const URL_DEFAULT = "https://ipgeolocation.abstractapi.com/v1/?api_key=f62c08003cb646dcb698199c8a40cc6f"; // Esta URL nos mostrara nuestra geolocalización
 let URL = ""; //Aqui pondremos la url + la ip que nos pasen.
-
+const comprobarIP = /\b(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\.){3}(?:(?:2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))\b/gi; //regex para comprobar la ip
 let map; //inicializar el contenedor map 
 
 
@@ -16,10 +16,10 @@ window.onload = () => {
     })
 }
 
+
 function CargarMapa(lat,lng){ //Pasaremos la latencia y la longitud a esta función
 
-if (map != undefined) { map.remove(); } //comprobamos si existe un "map" inicializado, si es el caso, lo borramos y creamos uno.
-
+if (map != undefined) { map.remove(); } //comprobamos si existe un "map" creado, si es el caso, lo borramos y creamos uno.
     zoom = 10;
     map = L.map('map').setView([lat, lng], zoom); //Establecemos el mapa.
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -39,7 +39,13 @@ function MostrarDatos(datos){ //Aqui "pintaremos" el dom
 
 async function cargarDatos(ip){ //Aqui recogeremos la IP
     let req;
-    if(!ip == ""){ 
+    if( ip == undefined){
+        req = await fetch(URL_DEFAULT);
+        req = await req.json();
+        MostrarDatos(req);
+        CargarMapa(req.latitude, req.longitude);
+    }
+    else if((ip != "") && comprobarIP.test(ip)){ 
         let req;
         URL = URL_DEFAULT + "&ip_address=" + ip; //Añadiremos la ip a la URL.
         req = await fetch(URL); //Hacemos una request para obtener el json con los datos.
@@ -48,10 +54,7 @@ async function cargarDatos(ip){ //Aqui recogeremos la IP
         CargarMapa(req.latitude, req.longitude);
         
     }else{
-        req = await fetch(URL_DEFAULT);
-        req = await req.json();
-        MostrarDatos(req);
-        CargarMapa(req.latitude, req.longitude);
+        alert("Pon una IP válida");
     }
 
 }
