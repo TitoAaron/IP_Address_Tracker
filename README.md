@@ -1,6 +1,7 @@
 Se han definido las variables generales URL_DEFAULT, URL, ComprbarIP y map
 
 Al cargar la página lo primero que veremos sera nuestra ubicación con la funcion "cargarDatos()".
+https://github.com/TitoAaron/IP_Address_Tracker/blob/master/images/cargar_pagina.PNG?raw=true
 
 Al introducir una IP, se enviará a la funcion cargarDatos() para evaluarla con la expression regular.
 
