@@ -1,5 +1,5 @@
 Se han definido las variables generales URL_DEFAULT, URL, ComprbarIP y map
-
+![variables](https://github.com/TitoAaron/IP_Address_Tracker/blob/master/images/variables.PNG)
 
 
 Al cargar la página lo primero que veremos sera nuestra ubicación con la funcion "cargarDatos()".
@@ -12,8 +12,10 @@ Al introducir una IP, se enviará a la funcion cargarDatos() para evaluarla con 
     -Si se da por válida la ip, se enviaran los datos a las funciones MostrarDatos() y  CargarMapa
 
     -Cuando el usuario introduzca mal la ip, nos saldrá una alert.
-    ![a](https://github.com/TitoAaron/IP_Address_Tracker/blob/master/images/malip.PNG)
+    
 
 La funcion mostrarDatos() introducirá los valores de los datos que recibamos en sus respectivas etiquetas.
+![mostrar datos](https://github.com/TitoAaron/IP_Address_Tracker/blob/master/images/mostrarDatos.PNG)
 
-La funcion cargarMapa() se encargará de mostrar la ubicacion de la ip que hemos pasado mediante la latencia y la longitud. 
+La funcion cargarMapa() se encargará de mostrar la ubicacion de la ip que hemos pasado mediante la latencia y la longitud.
+![Mapa](https://github.com/TitoAaron/IP_Address_Tracker/blob/master/images/Mapa.PNG)
