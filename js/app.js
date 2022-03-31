@@ -8,7 +8,7 @@ let map; //inicializar el contenedor map
 
 window.onload = () => {
 
-    cargarDatos(); //al cargar la página lo primero que veremos sera nuestra ubicación.
+    cargarDatos(); 
 
     document.querySelector(".search_button").addEventListener("click" , ()=>{ 
             let IP = document.querySelector(".ip_input").value;
@@ -17,7 +17,7 @@ window.onload = () => {
 }
 
 
-function CargarMapa(lat,lng){ //Pasaremos la latencia y la longitud a esta función
+function cargarMapa(lat,lng){ //Pasaremos la latencia y la longitud a esta función
 
 if (map != undefined) { map.remove(); } //comprobamos si existe un "map" creado, si es el caso, lo borramos y creamos uno.
     zoom = 10;
@@ -30,7 +30,7 @@ if (map != undefined) { map.remove(); } //comprobamos si existe un "map" creado,
     .addTo(map);
 }
 
-function MostrarDatos(datos){ //Aqui "pintaremos" el dom
+function mostrarDatos(datos){ //Aqui "pintaremos" el dom
     document.querySelector(".ip_address").textContent = datos.ip_address;
     document.querySelector(".location_value").textContent = datos.city;
     document.querySelector(".time_zone_value").textContent = datos.timezone.current_time
@@ -42,16 +42,16 @@ async function cargarDatos(ip){ //Aqui recogeremos la IP
     if( ip == undefined){
         req = await fetch(URL_DEFAULT);
         req = await req.json();
-        MostrarDatos(req);
-        CargarMapa(req.latitude, req.longitude);
+        mostrarDatos(req);
+        cargarMapa(req.latitude, req.longitude);
     }
     else if((ip != "") && comprobarIP.test(ip)){ 
         let req;
         URL = URL_DEFAULT + "&ip_address=" + ip; //Añadiremos la ip a la URL.
         req = await fetch(URL); //Hacemos una request para obtener el json con los datos.
         req = await req.json();
-        MostrarDatos(req);
-        CargarMapa(req.latitude, req.longitude);
+        mostrarDatos(req);
+        cargarMapa(req.latitude, req.longitude);
         
     }else{
         alert("Pon una IP válida");
